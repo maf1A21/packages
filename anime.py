@@ -45,30 +45,30 @@ data_frame[theme] = data_frame[theme].fillna('Smth else')
 
 #-------------------------------------------------------------------------------------------------------------------
 
-fig = plt.figure('Production', figsize=(16, 9))
+fig = plt.figure('Продакшен', figsize=(16, 9))
 prod = data_frame[production].sort_values().value_counts()[:20]
 prod.plot.bar()
 #-------------------------------------------------------------------------------------------------------------------
-fig = plt.figure('Episodes', figsize=(16, 9))
+fig = plt.figure('Эпизоды', figsize=(16, 9))
 ep = data_frame[episodes].value_counts()[:20]
 ep.plot.bar()
 #-------------------------------------------------------------------------------------------------------------------
-fig2 = plt.figure('Source', figsize=(16, 9))
+fig2 = plt.figure('Источник', figsize=(16, 9))
 sr = data_frame[source].value_counts()[:20]
 sr.plot.bar()
 #-------------------------------------------------------------------------------------------------------------------
-fig3 = plt.figure('Rating', figsize=(16, 9))
+fig3 = plt.figure('Рейтинги', figsize=(16, 9))
 rmean = data_frame[rating].groupby(data_frame[production]).mean()
 rmean = rmean.sort_values(ascending = False)[:20]
 rmean.plot.bar()
 #-------------------------------------------------------------------------------------------------------------------
-fig4 = plt.figure('Rating Intervals', figsize=(16, 9), dpi=120)
+fig4 = plt.figure('Интевалы рейтингов', figsize=(16, 9), dpi=120)
 rt = data_frame['rating'].groupby(by=(data_frame['rating'].apply(np.floor)), dropna=True).count()
 rt.plot.bar()
 
 #-------------------------------------------------------------------------------------------------------------------
 
-fig = plt.figure('Best themes ', figsize=(16, 9), dpi=120)
+fig = plt.figure('Лучшие темы', figsize=(16, 9), dpi=120)
 masked = set(data_frame['theme'])
 et = set()
 for comb in masked:
@@ -89,7 +89,7 @@ for tup in t:
     val.append(tup[1])
 plt.barh(range(len(t)), val, tick_label=label)
 
-fig = plt.figure('Best genres', figsize=(16, 9), dpi=120)
+fig = plt.figure('Лучшие жанры', figsize=(16, 9), dpi=120)
 masked = set(data_frame['genre'])
 et = set()
 for comb in masked:
@@ -110,7 +110,9 @@ for tup in t:
     val.append(tup[1])
 plt.barh(range(len(t)), val, tick_label=label)
 
-fig = plt.figure('Themes Rating Average', figsize=(16, 9), dpi=120)
+#---------------------------------------------------------------------------------------------------------------------------------------------
+
+fig = plt.figure('Средний рейтинг тем', figsize=(16, 9), dpi=120)
 masked = set(data_frame['theme'])
 et = set()
 for comb in masked:
@@ -131,7 +133,7 @@ for tup in t:
     val.append(tup[1])
 plt.barh(range(len(t)), val, tick_label=label)
 
-fig = plt.figure('Genres Rating Average', figsize=(16, 9), dpi=120)
+fig = plt.figure('Средний рейтинг жанров', figsize=(16, 9), dpi=120)
 masked = set(data_frame['genre'])
 et = set()
 for comb in masked:
@@ -154,7 +156,7 @@ plt.barh(range(len(t)), val, tick_label=label)
 
 #-------------------------------------------------------------------------------------------------------------------
 
-fig8 = plt.figure('corelation between voters and ratings', figsize=(16, 9))
+fig8 = plt.figure('Кореляция между проголосовавшими и рейтингами', figsize=(16, 9))
 x = list(data_frame['voters'])
 y = list(data_frame['rating'])
 plt.scatter(x, y)
@@ -162,5 +164,6 @@ plt.scatter(x, y)
 #-------------------------------------------------------------------------------------------------------------------
 
 plt.show()
+
 
 
